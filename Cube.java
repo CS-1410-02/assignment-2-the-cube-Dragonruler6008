@@ -1,3 +1,7 @@
+//Authors
+//Lucas Bigler
+//Nick Savage
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,9 +12,13 @@ public class Cube {
   {
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); // for later input
 
+    //Create the color map
     String[][][] temp = new String[6][3][3];
+    //Set colors to a color array
     String[] colors = new String[] {"w","r","b","o","g","y"};
+    //Create the cubemap
     String[][] cubemap = new String[9][15];
+    //Storage for the cubemap
     String[][] cubemapPrevious = new String[9][15];
     
     //Setting all colors properly on the rubics cube
@@ -27,7 +35,7 @@ public class Cube {
       
       //setting colors to proper spaces on cubemap
 
-      //top 3 spaces of x axis
+        //top 3 spaces of x axis
       for(int j=0;j<3;j++){
         for(int k=8;k<11;k++) {
           cubemap[j][k] = (temp[0][k-8][j]);
@@ -59,13 +67,24 @@ public class Cube {
       for(int j=0; j<9; j++){
                 for(int k=0; k<15; k++){
                     if(cubemap[j][k] == null)
-                        System.out.printf("_");
-                    else
-                        System.out.printf(cubemap[j][k]);
-                }
-                System.out.println();
+                       cubemap[j][k] = "_";
       }
-      
+      }
+    for(int j=0;j<9;j++) {
+      for(int k=0;k<15;k++) {
+        cubemapPrevious[j][k] = cubemap[j][k];
+      }
+    }
+    for(int j=0;j<9;j++) {
+      for(int k=0;k<15;k++) {
+        System.out.printf(cubemapPrevious[j][k]);
+      }
+      System.out.println();
+    }
+
+
+
+
 
       
 
