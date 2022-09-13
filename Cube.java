@@ -6,19 +6,13 @@ public class Cube {
 	public static void main(final String[] args)
   throws IOException
   {
-    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); // for later input
 
     String[][][] temp = new String[6][3][3];
     String[] colors = new String[] {"w","r","b","o","g","y"};
-    String[][] cubemap = new String[12][9];
+    String[][] cubemap = new String[9][15];
+    String[][] cubemapPrevious = new String[9][15];
     
-    
-    
-    
-
-
-
-
     //Setting all colors properly on the rubics cube
     // I = center color of rubics cube
     // J = y axis of rubics cube
@@ -30,11 +24,67 @@ public class Cube {
           }
         }
       }
+      
+      //setting colors to proper spaces on cubemap
+
+      //top 3 spaces of x axis
       for(int j=0;j<3;j++){
-        
+        for(int k=8;k<11;k++) {
+          cubemap[j][k] = (temp[0][k-8][j]);
+        }
       }
 
-      //THIS IS CHECKING ALL OF THE LAYER COLORS IN A MORE DIFFICULT WAY TO READ IT
+        //middle 3 space of x axis
+      for(int j=3;j<6;j++){
+        for(int k=0;k<3;k++){
+          cubemap[j][k] = temp[1][k][j-3];
+        }
+        for(int k=4;k<7;k++){
+          cubemap[j][k] = temp[2][k-4][j-3];
+        }
+        for(int k=8;k<11;k++){
+          cubemap[j][k] = temp[3][k-8][j-3];
+        }
+       for(int k=12;k<15;k++){
+          cubemap[j][k] = temp[4][k-12][j-3];
+        }
+      }
+
+        //bottom 3 spaces of x axis
+      for(int j=6;j<9;j++){
+        for(int k=8;k<11;k++) {
+          cubemap[j][k] = (temp[5][k-8][j-6]);
+        }
+      }
+      for(int j=0; j<9; j++){
+                for(int k=0; k<15; k++){
+                    if(cubemap[j][k] == null)
+                        System.out.printf("_");
+                    else
+                        System.out.printf(cubemap[j][k]);
+                }
+                System.out.println();
+      }
+      
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            
+            
+
+      //THIS IS CHECKING ALL OF THE LAYER COLORS IN A MORE DIFFICULT WAY TO READ IT. Maybe useful later
       // for(int i=0; i<6; i++) {
       // for( int j=0; j<3; j++){
       //   for(int k=0;k<3;k++){
@@ -43,62 +93,5 @@ public class Cube {
       //     System.out.println();
       //   }
       // }
-
-
-    //displaying rubics cube map in a human readable fashion
- 
-    //setting the first set of underscores.
-    for(int i=0; i<3; i++){
-      for(int j=0; j<9; j++) {
-        cubemap[i][j] = "_";
-      }
-    }
-
-    //Top layer of rubics cube map
-      for(int i=0; i<3; i++){
-      for(int j=0; j<8; j++) {
-        System.out.printf(cubemap[i][j]);
-      }
-      for(int k=0 ;k<3;k++) {
-        System.out.printf(temp[0][i][i]);
-      }
-      for(int l=0;l<4;l++){
-        System.out.printf("_");
-      }
-      System.out.println();
-    }
-
-    //Middle layer of rubics cube map
-    for(int k=0;k<3;k++) {
-      for(int j=0; j<3; j++) {
-        System.out.printf(temp[1][j][k]);
-      }
-      System.out.printf("_");
-      for(int j=0;j<3;j++) {
-         System.out.printf(temp[2][j][k]);
-      }
-      System.out.printf("_");
-      for(int j=0;j<3;j++) {
-         System.out.printf(temp[3][j][k]);
-      }
-      System.out.printf("_");
-      for(int j=0;j<3;j++) {
-         System.out.printf(temp[4][j][k]);
-      }
-      System.out.println();
-    }
-  //Bottom layer of rubics cube map
-    for(int i=0; i<3; i++){
-      for(int j=0; j<8; j++) {
-        System.out.printf(cubemap[i][j]);
-      }
-      for(int k=0 ;k<3;k++) {
-        System.out.printf(temp[5][i][i]);
-      }
-      for(int l=0;l<4;l++){
-        System.out.printf("_");
-      }
-      System.out.println();
-    }
-}
+  }
 }
