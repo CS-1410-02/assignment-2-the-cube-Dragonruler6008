@@ -161,6 +161,8 @@ public class Cube {
           break;
         // Front face clockwise
         case "F":
+          clockwise(6);
+          displayCubeMap();
           break;
         // Back face counterclockwise
         case "B":
@@ -190,6 +192,8 @@ public class Cube {
           break;
         // Back face of cube clockwise
         case "B'":
+          clockwise(6);
+          displayCubeMap();
           break;
         // Stop solving / give up
         case "q":
@@ -249,6 +253,7 @@ public class Cube {
     }
   }
 
+  // Does Code for moving cube up
   private static void up(int l) {
     for (int k = 0; k < 3; k++) {
       cubemap[k][l] = cubemapPrevious[k + 3][l];
@@ -256,18 +261,36 @@ public class Cube {
     for (int k = 3; k < 6; k++) {
       cubemap[k][l] = cubemapPrevious[k + 3][l];
     }
-    for (int k = 3; k < 6; k++) {
-      cubemap[k + 3][l] = cubemapPrevious[k][l - 6];
+    if (l == 6) {
+      for (int k = 3; k < 6; k++) {
+        cubemap[k + 3][l] = cubemapPrevious[k][l - 4];
+      }
+    } else {
+      for (int k = 3; k < 6; k++) {
+        cubemap[k + 3][l] = cubemapPrevious[k][l - 8];
+      }
     }
-    for (int k = 3; k < 6; k++) {
-      cubemap[k][l - 6] = cubemapPrevious[k - 3][l];
+    if (l == 6) {
+      for (int k = 3; k < 6; k++) {
+        cubemap[k][l - 4] = cubemapPrevious[k - 3][l];
+      }
+    } else {
+      for (int k = 3; k < 6; k++) {
+        cubemap[k][l - 8] = cubemapPrevious[k - 3][l];
+      }
     }
   }
 
   // Does code for moving cube parts down
   private static void down(int l) {
-    for (int k = 0; k < 3; k++) {
-      cubemap[k][l] = cubemapPrevious[k + 3][l - 6];
+    if (l == 6) {
+      for (int k = 0; k < 3; k++) {
+        cubemap[k][l] = cubemapPrevious[k + 3][l - 4];
+      }
+    } else {
+      for (int k = 0; k < 3; k++) {
+        cubemap[k][l] = cubemapPrevious[k + 3][l - 8];
+      }
     }
     for (int k = 3; k < 6; k++) {
       cubemap[k][l] = cubemapPrevious[k - 3][l];
@@ -275,9 +298,21 @@ public class Cube {
     for (int k = 6; k < 9; k++) {
       cubemap[k][l] = cubemapPrevious[k - 3][l];
     }
-    for (int k = 3; k < 6; k++) {
-      cubemap[k][l - 6] = cubemapPrevious[k + 3][l];
+    if (l == 6) {
+      for (int k = 3; k < 6; k++) {
+        cubemap[k][l - 4] = cubemapPrevious[k + 3][l];
+      }
+    } else {
+      for (int k = 3; k < 6; k++) {
+        cubemap[k][l - 8] = cubemapPrevious[k + 3][l];
+      }
     }
   }
 
+  private static void clockwise(int l) {
+    for (int k = 0; k < 3; k++) {
+      cubemap[k][l] = cubemapPrevious[k][l];
+      System.out.printf(cubemap[k][l]);
+    }
+  }
 }
