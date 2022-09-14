@@ -151,7 +151,7 @@ public class Cube {
           break;
         // Right side of cube up
         case "R":
-          down(8);
+          up(8);
           displayCubeMap();
           break;
         // Left side of cube down
@@ -182,7 +182,7 @@ public class Cube {
           break;
         // Left side of cube up
         case "L'":
-          down(6);
+          up(6);
           displayCubeMap();
           break;
         // Front face counterclockwise
@@ -196,8 +196,10 @@ public class Cube {
           proceed = false;
           // System.out.println("QUITTER!");
           break;
+        case "L+Ratio":
+          System.out.println("Ratioed");
         default:
-          System.out.println("You must enter one of the commands!");
+          System.out.println("You must enter one of the cube movement commands!");
       }
     }
 
@@ -213,6 +215,7 @@ public class Cube {
     // }
   }
 
+  // Shows the cubemap to the user via cmd line.
   private static void displayCubeMap() {
     for (int j = 0; j < 9; j++) {
       for (int k = 0; k < 12; k++) {
@@ -223,6 +226,7 @@ public class Cube {
     }
   }
 
+  // Does code for moving cube parts left
   private static void left(int l) {
     for (int k = 0; k < 12; k++) {
       if (k >= 9) {
@@ -233,6 +237,7 @@ public class Cube {
     }
   }
 
+  // Does code for moving cube parts right
   private static void right(int l) {
     for (int k = 0; k < 12; k++) {
       if (k >= 3) {
@@ -244,6 +249,22 @@ public class Cube {
     }
   }
 
+  private static void up(int l) {
+    for (int k = 0; k < 3; k++) {
+      cubemap[k][l] = cubemapPrevious[k + 3][l];
+    }
+    for (int k = 3; k < 6; k++) {
+      cubemap[k][l] = cubemapPrevious[k + 3][l];
+    }
+    for (int k = 3; k < 6; k++) {
+      cubemap[k + 3][l] = cubemapPrevious[k][l - 6];
+    }
+    for (int k = 3; k < 6; k++) {
+      cubemap[k][l - 6] = cubemapPrevious[k - 3][l];
+    }
+  }
+
+  // Does code for moving cube parts down
   private static void down(int l) {
     for (int k = 0; k < 3; k++) {
       cubemap[k][l] = cubemapPrevious[k + 3][l - 6];
@@ -258,4 +279,5 @@ public class Cube {
       cubemap[k][l - 6] = cubemapPrevious[k + 3][l];
     }
   }
+
 }
