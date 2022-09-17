@@ -167,7 +167,7 @@ public class Cube {
           break;
         // Front face clockwise
         case "F":
-          clockwise(0);
+          clockwise(2); // is Nick's 3
           displayCubeMap();
           break;
         // Back face counterclockwise
@@ -219,15 +219,15 @@ public class Cube {
 
     // THIS IS CHECKING ALL OF THE LAYER COLORS IN A MORE DIFFICULT WAY TO READ IT.
     // Maybe useful later
-  //   for(int i=0; i<6; i++) {
-  //   for( int j=0; j<3; j++){
-  //   for(int k=0;k<3;k++){
-  //   System.out.printf(temp[i][j][k]);
-  //   }
-  //   System.out.println();
-  //   }
-  //   }
-}
+    // for(int i=0; i<6; i++) {
+    // for( int j=0; j<3; j++){
+    // for(int k=0;k<3;k++){
+    // System.out.printf(temp[i][j][k]);
+    // }
+    // System.out.println();
+    // }
+    // }
+  }
 
   // Shows the cubemap to the user via cmd line.
   private static void displayCubeMap() {
@@ -321,9 +321,16 @@ public class Cube {
 
   // Does clockwise Function for the cube (front/back)
   private static void clockwise(int l) {
-    for (int k = 0; k < 3; k++) {
-      cubemap[k][l] = cubemapPrevious[k][l];
-      System.out.printf(cubemap[k][l]);
+    if (l == 2) {
+      for (int i = 9; i < 12; i++) {
+        cubemap[i - 6][l + 7] = cubemapPrevious[2][i - 3];
+        // System.out.printf(cubemap[i - 6][l + 7]);
+      }
+      for (int j = 6; j < 9; j++) {
+        cubemap[6][j] = cubemapPrevious[j - 3][9];
+        System.out.println(cubemap[6][j]);
+      }
+
     }
   }
 
