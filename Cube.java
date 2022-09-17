@@ -1,7 +1,7 @@
 /*
 Authors
-Lucas Bigler
-Nick Savage
+Lucas Bigler @Dragonruler6008
+Nick Savage @thesavagen
 */
 
 import java.io.BufferedReader;
@@ -202,7 +202,7 @@ public class Cube {
           break;
         // Back face of cube clockwise
         case "B'":
-          clockwise(0);
+          clockwise(3);
           displayCubeMap();
           break;
         // Stop solving / give up
@@ -322,6 +322,7 @@ public class Cube {
   // Does clockwise Function for the cube (front/back)
   private static void clockwise(int l) {
     if (l == 2) {
+      // Front of cube clockwise
       for (int i = 9; i < 12; i++) {
         cubemap[i - 6][l + 7] = cubemapPrevious[2][i - 3];
       }
@@ -335,11 +336,27 @@ public class Cube {
         cubemap[l][j+6] = cubemapPrevious[j+3][5];
       }
     }
+    // Back face of cube clockwise
+    else {
+      for(int j = 9; j < 12; j++) {
+        cubemap[j-6][11] = cubemapPrevious[0][j-3];
+      }
+      for(int j = 6; j < 9; j++) {
+        cubemap[8][j] = cubemapPrevious[j-3][11];
+      }
+      for(int j = 3; j < 6; j++) {
+        cubemap[j][3] = cubemapPrevious[8][j+3];  
+      }
+      for(int j = 0; j < 3; j++) {
+        cubemap[0][j+6] = cubemapPrevious[j+3][3];
+      }
+    }
   }
 
   // Does counterclockwise functions for the cube (front/back)
   private static void counterclockwise(int l) {
     if (l == 2) {
+      // Front of cube counterclockwise
       for (int i = 9; i < 12; i++) {
         cubemap[l][i-3] =  cubemapPrevious[i-6][9];
       }
@@ -353,6 +370,7 @@ public class Cube {
         cubemap[j+3][9] = cubemapPrevious[6][j+6];
       }
     }
+    // Back face of cube counterclockwise
     else {
       for(int j = 9; j < 12; j++) {
         cubemap[j-6][3] = cubemapPrevious[0][j-3];
