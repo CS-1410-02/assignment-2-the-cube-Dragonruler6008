@@ -1,6 +1,8 @@
-//Authors
-//Lucas Bigler
-//Nick Savage
+/*
+Authors
+Lucas Bigler
+Nick Savage
+*/
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,8 +14,7 @@ public class Cube {
   // Storage for the cubemap
   static String[][] cubemapPrevious = new String[9][12];
 
-  public static void main(final String[] args)
-      throws IOException {
+  public static void main(final String[] args) throws IOException {
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); // for later input
     boolean argsCheck = false;
 
@@ -24,7 +25,9 @@ public class Cube {
     }
     // Create the color map
     String[][][] temp = new String[6][3][3];
+
     // Set colors to a color array
+    // MAYBE CHANGE TO CHAR ARRAY LATER
     String[] colors = new String[] { "w", "r", "b", "o", "g", "y" };
 
     // Setting all colors properly on the rubics cube
@@ -41,14 +44,14 @@ public class Cube {
 
     // setting colors to proper spaces on cubemap
 
-    // top 3 spaces of x axis
+    // Top 3 spaces of x axis
     for (int j = 0; j < 3; j++) {
       for (int k = 6; k < 9; k++) {
         cubemap[j][k] = (temp[0][k - 6][j]);
       }
     }
 
-    // middle 3 space of x axis
+    // Middle 3 space of x axis
     for (int j = 3; j < 6; j++) {
       for (int k = 0; k < 3; k++) {
         cubemap[j][k] = temp[1][k][j - 3];
@@ -64,7 +67,7 @@ public class Cube {
       }
     }
 
-    // bottom 3 spaces of x axis
+    // Bottom 3 spaces of x axis
     for (int j = 6; j < 9; j++) {
       for (int k = 6; k < 9; k++) {
         cubemap[j][k] = (temp[5][k - 6][j - 6]);
@@ -122,7 +125,10 @@ public class Cube {
     // cubemap[l][j] = cubemapPrevious[l-5][j-6];
     // }
 
-    // stolen
+    // Instructs the user to input a command to move the cube
+    System.out.println("Enter a command to move the cube!");
+
+    // Stolen
     while (proceed) {
       String input;
 
@@ -161,11 +167,13 @@ public class Cube {
           break;
         // Front face clockwise
         case "F":
-          clockwise(6);
+          clockwise(0);
           displayCubeMap();
           break;
         // Back face counterclockwise
         case "B":
+          counterclockwise(0);
+          displayCubeMap();
           break;
         // Top of cube right
         case "U'":
@@ -189,10 +197,12 @@ public class Cube {
           break;
         // Front face counterclockwise
         case "F'":
+          counterclockwise(0);
+          displayCubeMap();
           break;
         // Back face of cube clockwise
         case "B'":
-          clockwise(6);
+          clockwise(0);
           displayCubeMap();
           break;
         // Stop solving / give up
@@ -209,15 +219,15 @@ public class Cube {
 
     // THIS IS CHECKING ALL OF THE LAYER COLORS IN A MORE DIFFICULT WAY TO READ IT.
     // Maybe useful later
-    // for(int i=0; i<6; i++) {
-    // for( int j=0; j<3; j++){
-    // for(int k=0;k<3;k++){
-    // System.out.printf(temp[i][j][k]);
-    // }
-    // System.out.println();
-    // }
-    // }
-  }
+  //   for(int i=0; i<6; i++) {
+  //   for( int j=0; j<3; j++){
+  //   for(int k=0;k<3;k++){
+  //   System.out.printf(temp[i][j][k]);
+  //   }
+  //   System.out.println();
+  //   }
+  //   }
+}
 
   // Shows the cubemap to the user via cmd line.
   private static void displayCubeMap() {
@@ -309,10 +319,16 @@ public class Cube {
     }
   }
 
+  // Does clockwise Function for the cube (front/back)
   private static void clockwise(int l) {
     for (int k = 0; k < 3; k++) {
       cubemap[k][l] = cubemapPrevious[k][l];
       System.out.printf(cubemap[k][l]);
     }
+  }
+
+  // Does counterclockwise functions for the cube (front/back)
+  private static void counterclockwise(int l) {
+
   }
 }
