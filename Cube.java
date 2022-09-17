@@ -324,13 +324,16 @@ public class Cube {
     if (l == 2) {
       for (int i = 9; i < 12; i++) {
         cubemap[i - 6][l + 7] = cubemapPrevious[2][i - 3];
-        // System.out.printf(cubemap[i - 6][l + 7]);
       }
       for (int j = 6; j < 9; j++) {
         cubemap[6][j] = cubemapPrevious[j - 3][9];
-        System.out.println(cubemap[6][j]);
       }
-
+      for (int j = 3; j < 6; j++) {
+        cubemap[j][l+3] = cubemapPrevious[6][j+3];
+      }
+      for (int j = 0; j < 3; j++) {
+        cubemap[l][j+6] = cubemapPrevious[j+3][5];
+      }
     }
   }
 
