@@ -172,7 +172,7 @@ public class Cube {
           break;
         // Back face counterclockwise
         case "B":
-          counterclockwise(0);
+          counterclockwise(3);
           displayCubeMap();
           break;
         // Top of cube right
@@ -197,7 +197,7 @@ public class Cube {
           break;
         // Front face counterclockwise
         case "F'":
-          counterclockwise(0);
+          counterclockwise(2);
           displayCubeMap();
           break;
         // Back face of cube clockwise
@@ -339,6 +339,33 @@ public class Cube {
 
   // Does counterclockwise functions for the cube (front/back)
   private static void counterclockwise(int l) {
-
+    if (l == 2) {
+      for (int i = 9; i < 12; i++) {
+        cubemap[l][i-3] =  cubemapPrevious[i-6][9];
+      }
+      for (int j = 6; j < 9; j++) {
+        cubemap[j-3][5] = cubemapPrevious[l][j];
+      }
+      for (int j = 3; j < 6; j++) {
+        cubemap[6][j+3] =cubemapPrevious[j][5];
+      }
+      for (int j = 0; j < 3; j++) {
+        cubemap[j+3][9] = cubemapPrevious[6][j+6];
+      }
+    }
+    else {
+      for(int j = 9; j < 12; j++) {
+        cubemap[j-6][3] = cubemapPrevious[0][j-3];
+      }
+      for(int j = 6; j < 9; j++) {
+        cubemap[8][j] = cubemapPrevious[j-3][3];
+      }
+      for(int j = 3; j < 6; j++) {
+        cubemap[j][11] = cubemapPrevious[8][j+3];
+      }
+      for(int j = 0; j < 3; j++) {
+        cubemap[0][j+6] = cubemapPrevious[j+3][11];
+      }
+    }
   }
 }
