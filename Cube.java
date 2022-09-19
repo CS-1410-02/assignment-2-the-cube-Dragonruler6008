@@ -137,7 +137,7 @@ public class Cube {
       } else {
         if (argsRunIndex == args.length) {
           argsCheck = false;
-          input = "e";
+          input = "q";
         } else {
           input = args[argsRunIndex];
           argsRunIndex++;
