@@ -369,18 +369,22 @@ public class Cube {
   // Does counterclockwise functions for the cube (front/back)
   private static void counterclockwise(int l) {
     if (l == 2) {
+      int k = 5;
+      int h = 5;
       // Front of cube counterclockwise
       for (int i = 9; i < 12; i++) {
         cubemap[l][i-3] =  cubemapPrevious[i-6][9];
       }
       for (int j = 6; j < 9; j++) {
-        cubemap[j-3][5] = cubemapPrevious[l][j];
+        cubemap[h][5] = cubemapPrevious[l][j];
+        h -= 1;
       }
       for (int j = 3; j < 6; j++) {
         cubemap[6][j+3] =cubemapPrevious[j][5];
       }
       for (int j = 0; j < 3; j++) {
-        cubemap[j+3][9] = cubemapPrevious[6][j+6];
+        cubemap[k][9] = cubemapPrevious[6][j+6];
+        k -= 1;
       }
     }
     // Back face of cube counterclockwise
