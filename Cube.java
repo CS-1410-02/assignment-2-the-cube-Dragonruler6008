@@ -325,9 +325,10 @@ public class Cube {
 
   // Does clockwise Function for the cube (front/back)
   private static void clockwise(int l) {
-    int k=5;
-    int h =5;
+    
     if (l == 2) {
+      int k=5;
+      int h =5;
       // Front of cube clockwise
       for (int i = 9; i < 12; i++) {
         cubemap[i - 6][l + 7] = cubemapPrevious[2][i - 3];
@@ -350,14 +351,18 @@ public class Cube {
     }
     // Back face of cube clockwise
     else {
+      int k = 5;
+      int h = 5;
       for(int j = 9; j < 12; j++) {
         cubemap[j-6][11] = cubemapPrevious[0][j-3];
       }
       for(int j = 6; j < 9; j++) {
-        cubemap[8][j] = cubemapPrevious[j-3][11];
+        cubemap[8][j] = cubemapPrevious[k][11];
+        k -= 1;
       }
       for(int j = 3; j < 6; j++) {
-        cubemap[j][3] = cubemapPrevious[8][j+3];  
+        cubemap[h][3] = cubemapPrevious[8][j+3];  
+        h -= 1;
       }
       for(int j = 0; j < 3; j++) {
         cubemap[0][j+6] = cubemapPrevious[j+3][3];
@@ -389,14 +394,18 @@ public class Cube {
     }
     // Back face of cube counterclockwise
     else {
+      int k = 5;
+      int h = 5;
       for(int j = 9; j < 12; j++) {
-        cubemap[j-6][3] = cubemapPrevious[0][j-3];
+        cubemap[k][3] = cubemapPrevious[0][j-3];
+        k -= 1;
       }
       for(int j = 6; j < 9; j++) {
         cubemap[8][j] = cubemapPrevious[j-3][3];
       }
       for(int j = 3; j < 6; j++) {
-        cubemap[j][11] = cubemapPrevious[8][j+3];
+        cubemap[h][11] = cubemapPrevious[8][j+3];
+        h -= 1;
       }
       for(int j = 0; j < 3; j++) {
         cubemap[0][j+6] = cubemapPrevious[j+3][11];
