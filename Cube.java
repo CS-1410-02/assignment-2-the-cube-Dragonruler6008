@@ -212,6 +212,10 @@ public class Cube {
           break;
         case "L+Ratio":
           System.out.println("Ratioed");
+        case "Randomize":
+          RandomizingCubeTest();
+          displayCubeMap();
+          break;
         default:
           System.out.println("You must enter one of the cube movement commands!");
       }
@@ -321,20 +325,28 @@ public class Cube {
 
   // Does clockwise Function for the cube (front/back)
   private static void clockwise(int l) {
+    int k=5;
+    int h =5;
     if (l == 2) {
       // Front of cube clockwise
       for (int i = 9; i < 12; i++) {
         cubemap[i - 6][l + 7] = cubemapPrevious[2][i - 3];
       }
       for (int j = 6; j < 9; j++) {
-        cubemap[6][j] = cubemapPrevious[j - 3][9];
+        cubemap[6][j] = cubemapPrevious[h][9];
+        h -= 1;
       }
       for (int j = 3; j < 6; j++) {
         cubemap[j][l+3] = cubemapPrevious[6][j+3];
-      }
+      } 
       for (int j = 0; j < 3; j++) {
-        cubemap[l][j+6] = cubemapPrevious[j+3][5];
-      }
+          cubemap[l][j+6] = cubemapPrevious[k][5];
+          k -= 1;
+          // System.out.println(cubemap[l][j+6]);
+          System.out.println(k);
+        }
+
+        // cubemap[l][j+6] = cubemapPrevious[j+3][5];
     }
     // Back face of cube clockwise
     else {
@@ -352,6 +364,7 @@ public class Cube {
       }
     }
   }
+  
 
   // Does counterclockwise functions for the cube (front/back)
   private static void counterclockwise(int l) {
@@ -386,4 +399,133 @@ public class Cube {
       }
     }
   }
+  private static void RandomizingCube() {
+  int[][] ScrambleCube = new int[30][12];
+  String[][] saveMoves = new String[26][12];
+  int min = 0;
+  int max = 11;
+  
+for(int r = 0; r < 26; r++) {
+  int a = (int)(Math.random()*(max-min+1)+min);
+ScrambleCube[r][a] = 1;
+if(ScrambleCube[r][0] == 1) {
+  left(3);
+  saveMoves[r][0] = "U";
+}
+if(ScrambleCube[r][1] == 1) {
+  right(5);
+  saveMoves[r][0] = "D";
+}
+if(ScrambleCube[r][2] == 1) {
+  up(8);
+  saveMoves[r][0] = "R";
+}
+if(ScrambleCube[r][3] == 1) {
+  down(6);
+  saveMoves[r][0] = "L";
+}
+if(ScrambleCube[r][4] == 1) {
+  clockwise(2);
+  saveMoves[r][0] = "F";
+}
+if(ScrambleCube[r][5] == 1) {
+  counterclockwise(3);
+  saveMoves[r][0] = "B";
+}
+if(ScrambleCube[r][6] == 1) {
+  right(3);
+  saveMoves[r][0] = "U'";
+}
+if(ScrambleCube[r][7] == 1) {
+  left(5);
+  saveMoves[r][0] = "D'";
+}
+if(ScrambleCube[r][8] == 1) {
+  down(8);
+  saveMoves[r][0] = "R'";
+}
+if(ScrambleCube[r][9] == 1) {
+  up(6);
+  saveMoves[r][0] = "L'";
+}
+if(ScrambleCube[r][10] == 1) {
+  counterclockwise(2);
+  saveMoves[r][0] = "F'";
+}
+if(ScrambleCube[r][11] == 1) {
+  clockwise(3);
+  saveMoves[r][0] = "B'";
+  
+}
+ScrambleCube[r][a] = 0;
+}
+for(int r = 0; r < 26; r++) {
+  System.out.println(saveMoves[r][0]);
+}
+}
+  private static void RandomizingCubeTest() {
+  int[][] ScrambleCube = new int[30][12];
+  String[][] saveMoves = new String[26][12];
+  int min = 0;
+  int max = 11;
+  
+for(int r = 0; r < 5; r++) {
+  int a = (int)(Math.random()*(max-min+1)+min);
+ScrambleCube[r][a] = 1;
+if(ScrambleCube[r][0] == 1) {
+  left(3);
+  saveMoves[r][0] = "U";
+}
+if(ScrambleCube[r][1] == 1) {
+  right(5);
+  saveMoves[r][0] = "D";
+}
+if(ScrambleCube[r][2] == 1) {
+  up(8);
+  saveMoves[r][0] = "R";
+}
+if(ScrambleCube[r][3] == 1) {
+  down(6);
+  saveMoves[r][0] = "L";
+}
+if(ScrambleCube[r][4] == 1) {
+  clockwise(2);
+  saveMoves[r][0] = "F";
+}
+if(ScrambleCube[r][5] == 1) {
+  counterclockwise(3);
+  saveMoves[r][0] = "B";
+}
+if(ScrambleCube[r][6] == 1) {
+  right(3);
+  saveMoves[r][0] = "U'";
+}
+if(ScrambleCube[r][7] == 1) {
+  left(5);
+  saveMoves[r][0] = "D'";
+}
+if(ScrambleCube[r][8] == 1) {
+  down(8);
+  saveMoves[r][0] = "R'";
+}
+if(ScrambleCube[r][9] == 1) {
+  up(6);
+  saveMoves[r][0] = "L'";
+}
+if(ScrambleCube[r][10] == 1) {
+  counterclockwise(2);
+  saveMoves[r][0] = "F'";
+}
+if(ScrambleCube[r][11] == 1) {
+  clockwise(3);
+  saveMoves[r][0] = "B'";
+  
+}
+displayCubeMap();
+ScrambleCube[r][a] = 0;
+}
+for(int r = 0; r < 5; r++) {
+  System.out.println(saveMoves[r][0]);
+}
+}
 }
