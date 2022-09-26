@@ -244,7 +244,7 @@ public class Cube {
     }
   }
 
-  // Does code for moving cube parts left
+  // Does code for moving cube parts left //MAY NEED REDOING
   private static void left(int l) {
     for (int k = 0; k < 12; k++) {
       if (k >= 9) {
@@ -255,7 +255,7 @@ public class Cube {
     }
   }
 
-  // Does code for moving cube parts right
+  // Does code for moving cube parts right //MAY NEED REDOING
   private static void right(int l) {
     for (int k = 0; k < 12; k++) {
       if (k >= 3) {
@@ -269,28 +269,33 @@ public class Cube {
 
   // Does Code for moving cube up
   private static void up(int l) {
-    for (int k = 0; k < 3; k++) {
-      cubemap[k][l] = cubemapPrevious[k + 3][l];
-    }
-    for (int k = 3; k < 6; k++) {
-      cubemap[k][l] = cubemapPrevious[k + 3][l];
-    }
-    if (l == 6) {
-      for (int k = 3; k < 6; k++) {
-        cubemap[k + 3][l] = cubemapPrevious[k][l - 4];
+    if (l == 8) {
+      // Right side of cube up
+      for(int j = 0; j < 3; j++) {
+        cubemap[j][8] = cubemapPrevious[j+3][8];
+      } 
+      for(int j = 3; j < 6; j++) {
+        cubemap[j][0] = cubemapPrevious[j-3][8];
+      }
+      for(int j = 6; j < 9; j++) {
+        cubemap[j][8] = cubemapPrevious[j-3][0];
+      }
+      for(int j = 9; j < 12; j++) {
+        cubemap[j-6][8] = cubemapPrevious[j-3][8];
       }
     } else {
-      for (int k = 3; k < 6; k++) {
-        cubemap[k + 3][l] = cubemapPrevious[k][l - 8];
+      // Left side of cube up
+      for(int j = 0; j < 3; j++) {
+        cubemap[j][6] = cubemapPrevious[j+3][6];
+      } 
+      for(int j = 3; j < 6; j++) {
+        cubemap[j][2] = cubemapPrevious[j-3][6];
       }
-    }
-    if (l == 6) {
-      for (int k = 3; k < 6; k++) {
-        cubemap[k][l - 4] = cubemapPrevious[k - 3][l];
+      for(int j = 6; j < 9; j++) {
+        cubemap[j][6] = cubemapPrevious[j-3][2];
       }
-    } else {
-      for (int k = 3; k < 6; k++) {
-        cubemap[k][l - 8] = cubemapPrevious[k - 3][l];
+      for(int j = 9; j < 12; j++) {
+        cubemap[j-6][6] = cubemapPrevious[j-3][6];
       }
     }
   }
@@ -298,27 +303,31 @@ public class Cube {
   // Does code for moving cube parts down
   private static void down(int l) {
     if (l == 6) {
-      for (int k = 0; k < 3; k++) {
-        cubemap[k][l] = cubemapPrevious[k + 3][l - 4];
+      for(int j = 0; j < 3; j++){
+        cubemap[j+3][6] = cubemapPrevious[j][6];
       }
-    } else {
-      for (int k = 0; k < 3; k++) {
-        cubemap[k][l] = cubemapPrevious[k + 3][l - 8];
+      for(int j = 3; j < 6; j++){
+        cubemap[j+3][6] = cubemapPrevious[j][6];
+      }
+      for(int j = 6; j < 9; j++){
+        cubemap[j-3][2] = cubemapPrevious[j][6];
+      }
+      for(int j = 9; j < 12; j++){
+        cubemap[j-9][6] = cubemapPrevious[j-6][2];
       }
     }
-    for (int k = 3; k < 6; k++) {
-      cubemap[k][l] = cubemapPrevious[k - 3][l];
-    }
-    for (int k = 6; k < 9; k++) {
-      cubemap[k][l] = cubemapPrevious[k - 3][l];
-    }
-    if (l == 6) {
-      for (int k = 3; k < 6; k++) {
-        cubemap[k][l - 4] = cubemapPrevious[k + 3][l];
+    else {
+      for(int j = 0; j < 3; j++){
+        cubemap[j+3][8] = cubemapPrevious[j][8];
       }
-    } else {
-      for (int k = 3; k < 6; k++) {
-        cubemap[k][l - 8] = cubemapPrevious[k + 3][l];
+      for(int j = 3; j < 6; j++){
+        cubemap[j+3][8] = cubemapPrevious[j][8];
+      }
+      for(int j = 6; j < 9; j++){
+        cubemap[j-3][0] = cubemapPrevious[j][8];
+      }
+      for(int j = 9; j < 12; j++){
+        cubemap[j-9][8] = cubemapPrevious[j-6][0];
       }
     }
   }
@@ -328,23 +337,25 @@ public class Cube {
     
     if (l == 2) {
       int k=5;
-      int h =5;
+      int h=5;
       // Front of cube clockwise
       for (int i = 9; i < 12; i++) {
-        cubemap[i - 6][l + 7] = cubemapPrevious[2][i - 3];
+        cubemap[i - 6][9] = cubemapPrevious[2][i - 3];
+        cubemap[i - 6][8] = cubemapPrevious[3][i - 3];
       }
       for (int j = 6; j < 9; j++) {
         cubemap[6][j] = cubemapPrevious[h][9];
+        cubemap[5][j] = cubemapPrevious[h][8];
         h -= 1;
       }
       for (int j = 3; j < 6; j++) {
-        cubemap[j][l+3] = cubemapPrevious[6][j+3];
+        cubemap[j][5] = cubemapPrevious[6][j+3];
+        cubemap[j][6] = cubemapPrevious[5][j+3];
       } 
       for (int j = 0; j < 3; j++) {
-          cubemap[l][j+6] = cubemapPrevious[k][5];
+          cubemap[2][j+6] = cubemapPrevious[k][5];
+          cubemap[3][j+6] = cubemapPrevious[k][6];
           k -= 1;
-          // System.out.println(cubemap[l][j+6]);
-          System.out.println(k);
         }
 
         // cubemap[l][j+6] = cubemapPrevious[j+3][5];
@@ -353,62 +364,100 @@ public class Cube {
     else {
       int k = 5;
       int h = 5;
+      int f = 2;
+      int g = 2;
+      int u = 0;
+      int r = 0;
       for(int j = 9; j < 12; j++) {
         cubemap[j-6][11] = cubemapPrevious[0][j-3];
+        cubemap[j-6][0] = cubemapPrevious[3][f];
+        f -= 1;
       }
       for(int j = 6; j < 9; j++) {
         cubemap[8][j] = cubemapPrevious[k][11];
+        cubemap[5][u] = cubemapPrevious[j-3][0];
+        u += 1;
         k -= 1;
       }
       for(int j = 3; j < 6; j++) {
-        cubemap[h][3] = cubemapPrevious[8][j+3];  
-        h -= 1;
+        cubemap[j][3] = cubemapPrevious[8][j+3]; 
+        cubemap[j][2] = cubemapPrevious[5][g];
+        g--;
       }
       for(int j = 0; j < 3; j++) {
-        cubemap[0][j+6] = cubemapPrevious[j+3][3];
+        cubemap[0][j+6] = cubemapPrevious[h][3];
+        cubemap[3][r] = cubemapPrevious[j+3][2];
+        r += 1;
+        h -= 1;
       }
     }
   }
-  
-
+  static int n=0;
+  static int s=0;
   // Does counterclockwise functions for the cube (front/back)
   private static void counterclockwise(int l) {
     if (l == 2) {
-      int k = 5;
-      int h = 5;
+      
       // Front of cube counterclockwise
+      n=8;
       for (int i = 9; i < 12; i++) {
-        cubemap[l][i-3] =  cubemapPrevious[i-6][9];
+        
+        
+        cubemap[2][i-3] =  cubemapPrevious[i-6][9];
+        cubemap[i-6][6] = cubemapPrevious[3][n];
+        n--;
       }
+      n=8;
+      s=5;
       for (int j = 6; j < 9; j++) {
-        cubemap[h][5] = cubemapPrevious[l][j];
-        h -= 1;
+        cubemap[s][5] = cubemapPrevious[l][j];
+        cubemap[j-3][7] = cubemapPrevious[4][n];
+        n--;
+        s -= 1;
       }
+      n=8;
       for (int j = 3; j < 6; j++) {
         cubemap[6][j+3] =cubemapPrevious[j][5];
+        cubemap[5][j+3] = cubemapPrevious[j][6];
+        cubemap[j][8] = cubemapPrevious[5][n];
+        n--;
       }
+      s=5;
       for (int j = 0; j < 3; j++) {
-        cubemap[k][9] = cubemapPrevious[6][j+6];
-        k -= 1;
+        cubemap[s][9] = cubemapPrevious[6][j+6];
+        cubemap[s][8] = cubemapPrevious[5][j+6];
+        s -= 1;
       }
     }
     // Back face of cube counterclockwise
     else {
       int k = 5;
       int h = 5;
+      int f = 2;
+      int g = 2;
+      int u = 0;
+      int r = 0;
       for(int j = 9; j < 12; j++) {
         cubemap[k][3] = cubemapPrevious[0][j-3];
+        cubemap[k][0] = cubemapPrevious[3][f];
+        f -= 1;
         k -= 1;
       }
       for(int j = 6; j < 9; j++) {
         cubemap[8][j] = cubemapPrevious[j-3][3];
+        cubemap[j-3][2] = cubemapPrevious[3][u];
+        u += 1;
       }
       for(int j = 3; j < 6; j++) {
         cubemap[h][11] = cubemapPrevious[8][j+3];
+        cubemap[5][g] = cubemapPrevious[j][2];
+        g -= 1;
         h -= 1;
       }
       for(int j = 0; j < 3; j++) {
         cubemap[0][j+6] = cubemapPrevious[j+3][11];
+        cubemap[j+3][0] = cubemapPrevious[5][r];
+        r += 1;
       }
     }
   }
@@ -535,10 +584,33 @@ if(ScrambleCube[r][11] == 1) {
   
 }
 displayCubeMap();
+System.out.println();
 ScrambleCube[r][a] = 0;
 }
 for(int r = 0; r < 5; r++) {
   System.out.println(saveMoves[r][0]);
 }
-}
+//       int k = 5;
+//       int h = 5;
+//       // Front of cube counterclockwise
+//       for (int i = 9; i < 12; i++) {
+//         cubemap[2][i-3] = cubemapPrevious[i-6][9];
+//         cubemap[3][i-3] = cubemapPrevious[i-6][8];
+//       }
+//       h = 5;
+//       for (int j = 6; j < 9; j++) {
+//         cubemap[h][5] = cubemapPrevious[l][j];
+//         cubemap[h][6] = cubemapPrevious[3][j];
+//         h -= 1;
+//       }
+//       for (int j = 3; j < 6; j++) {
+//         cubemap[6][j+3] =cubemapPrevious[j][5];
+//         cubemap[5][j+3] = cubemapPrevious[j][6];
+//       }
+//       for (int j = 0; j < 3; j++) {
+//         cubemap[k][9] = cubemapPrevious[6][j+6];
+//         cubemap[k][8] = cubemapPrevious[5][j+6];
+//         k -= 1;
+//       }
+    }
 }
