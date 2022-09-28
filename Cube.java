@@ -244,28 +244,149 @@ public class Cube {
     }
   }
 
-  // Does code for moving cube parts left //MAY NEED REDOING
+  // Does code for moving cube parts left
+     //REDOING CODE AS A PROOF OF CONCEPT
   private static void left(int l) {
-    for (int k = 0; k < 12; k++) {
-      if (k >= 9) {
-        cubemap[l][k] = cubemapPrevious[l][k - 9];
-      } else {
-        cubemap[l][k] = cubemapPrevious[l][k + 3];
+    // Top of Cube Left
+    if(l == 3) {
+      int k = 8;
+      int f = 2;
+      int g = 0;
+      int u = 0;
+      int r = 0;
+      for (int j = 9; j < 12; j++) {
+        cubemap[3][j-3] = cubemapPrevious[3][j];
+        cubemap[2][j-3] = cubemapPrevious[f][8];
+        f--;
       }
+
+      for (int j = 6; j < 9; j++) {
+        cubemap[3][j-3] = cubemapPrevious[3][j];
+        cubemap[u][6] = cubemapPrevious[2][j];
+        u++;
+      }
+
+      for (int j = 3; j < 6; j++) {
+        cubemap[3][j-3] = cubemapPrevious[3][j];
+        cubemap[0][k] = cubemapPrevious[r][6];
+        r++;
+        k--;
+      } 
+
+      for (int j = 0; j < 3; j++) {
+        cubemap[3][j+9] = cubemapPrevious[3][j];
+        cubemap[g][8] = cubemapPrevious[0][j+6];
+        g++;
+        }
     }
+    // Bottom of Cube Left
+    else {
+      int k = 8;
+      int f = 8;
+      int g = 8;
+      for (int j = 9; j < 12; j++) {
+        cubemap[5][j-3] = cubemapPrevious[5][j];
+        cubemap[6][j-3] = cubemapPrevious[j-3][8];
+      }
+
+      for (int j = 6; j < 9; j++) {
+        cubemap[5][j-3] = cubemapPrevious[5][j];
+        cubemap[k][6] = cubemapPrevious[6][j];
+        k--;
+      }
+
+      for (int j = 3; j < 6; j++) {
+        cubemap[5][j-3] = cubemapPrevious[5][j];
+        cubemap[8][f] = cubemapPrevious[f][6];
+        f--;
+      } 
+
+      for (int j = 0; j < 3; j++) {
+        cubemap[5][j+9] = cubemapPrevious[5][j];
+        cubemap[g][8] = cubemapPrevious[8][j+6];
+        g--;
+        }
+    }
+
+ 
+    // for (int k = 0; k < 12; k++) {
+    //   if (k >= 9) {
+    //     cubemap[l][k] = cubemapPrevious[l][k - 9];
+    //   } else {
+    //     cubemap[l][k] = cubemapPrevious[l][k + 3];
+    //   }
+    // }
   }
 
   // Does code for moving cube parts right //MAY NEED REDOING
   private static void right(int l) {
-    for (int k = 0; k < 12; k++) {
-      if (k >= 3) {
-        cubemap[l][k] = cubemapPrevious[l][k - 3];
-      } else {
-        cubemap[l][k] = cubemapPrevious[l][k + 9];
+      // Bottom of Cube Right
+      if (l == 5) {
+        int k = 8;
+        int f = 8;
+        int g = 8;
+        for (int j = 9; j < 12; j++) {
+          cubemap[5][j] = cubemapPrevious[5][j-3];
+          cubemap[k][8] = cubemapPrevious[6][j-3];
+          k--;
+        }
+  
+        for (int j = 6; j < 9; j++) {
+          cubemap[5][j] = cubemapPrevious[5][j-3];
+          cubemap[8][j] = cubemapPrevious[f][8];
+          f--;
+
+        }
+  
+        for (int j = 3; j < 6; j++) {
+          cubemap[5][j] = cubemapPrevious[5][j-3];
+          cubemap[j+3][6] = cubemapPrevious[8][j+3];
+        } 
+  
+        for (int j = 0; j < 3; j++) {
+          cubemap[5][j] = cubemapPrevious[5][+9];
+          cubemap[j+6][6] = cubemap[6][g];
+          g--;
+          }
       }
+      // Top of Cube Right
+      else {
+        int f = 2;
+        int g = 2;
+        int u = 0;
+        int r = 0;
+        for (int j = 9; j < 12; j++) {
+          cubemap[3][j] = cubemapPrevious[3][j-3];
+          cubemap[r][8] = cubemapPrevious[0][j-3];
+          r++;
+        }
+  
+        for (int j = 6; j < 9; j++) {
+          cubemap[3][j] = cubemapPrevious[3][j-3];
+          cubemap[2][j] = cubemapPrevious[f][8];
+          f--;
+        }
+  
+        for (int j = 3; j < 6; j++) {
+          cubemap[3][j] = cubemapPrevious[3][j-3];
+          cubemap[u][6] = cubemapPrevious[2][j+3];
+          u++;
+        } 
+  
+        for (int j = 0; j < 3; j++) {
+          cubemap[3][j] = cubemapPrevious[3][+9];
+          cubemap[0][j+6] = cubemapPrevious[g][6];
+          g--;
+          }
+      }      
 
     }
-  }
+
+    // {
+      //   cubemap[l][k] = cubemapPrevious[l][k - 3];
+      // } else {
+      //   cubemap[l][k] = cubemapPrevious[l][k + 9];
+      // }
 
   // Does Code for moving cube up
   private static void up(int l) {
