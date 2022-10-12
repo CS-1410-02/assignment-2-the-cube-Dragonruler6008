@@ -8,6 +8,19 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+
+//Feedback:
+//  Looks good on the whole, works well with my testing. Its a different implementation that any that I've seen so far so thats really cool.
+//  I like that you separated your own internal display method from the one I requested, I think that that makes a lot of sense in terms of
+//  program understandability and was more or less how I meant people to do it.
+//  One thing in terms of usability is that I wasn't able to figure out how to find a solution until I read your code, nor did I realize  
+//  input had to be capitalized until I tried but not a big deal. I would maybe recommend using a .toLowerCase() function call on inputs 
+//  in order to avoid this but not necessary. 
+//  Also I might say passing oppcheck int your opposite() function might increase the applicability of that function as it may be difficult 
+//  for a new developer to recognize how that function works and if they were to add code may accidentally use that function incorrectly.
+//
+// On the whole I like it! Was very fun to read through!
+
 public class Cube {
   // Create the cubemap
   static String[][] cubemap = new String[9][12];
@@ -673,7 +686,7 @@ public class Cube {
     }
   }
 
-  private static void RandomizingCube() {
+  private static void RandomizingCube() { //if its unused you may as well delete or comment out as it may add some weight to your programs memory requirements.
     int[][] ScrambleCube = new int[30][12];
     String[][] saveMoves = new String[26][12];
     int min = 0;
@@ -806,7 +819,7 @@ public class Cube {
 
   }
 
-  private static void The_Way_The_Teacher_Wants_It_Displayed_Unoptimial() {
+  private static void The_Way_The_Teacher_Wants_It_Displayed_Unoptimial() { //lol
     for (int j = 3; j < 6; j++) {
       for (int k = 0; k < 3; k++) {
         System.out.printf(cubemap[j][k]);
@@ -852,7 +865,8 @@ public class Cube {
   }
 
   // Displays top as last and bottom is first
-  private static void Opposite() {
+  private static void Opposite(/*Would be wise to add ability for parameters and passing opposite that way */) {
+    //If you did take the parameter you could also insted just run one if check and either drop or add a (') to make it opposite. 
     if (oppcheck.equals("U")) {
       System.out.println("U'");
     } else if (oppcheck.equals("D")) {
